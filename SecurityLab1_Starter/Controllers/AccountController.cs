@@ -12,6 +12,7 @@ namespace SecurityLab1_Starter.Controllers
     public class AccountController : Controller
     {
         IAuthProvider authProvider;
+        string fileName = "userAccess.log";
 
         public AccountController(IAuthProvider auth)
         {
@@ -28,22 +29,26 @@ namespace SecurityLab1_Starter.Controllers
             {
                 if (authProvider.Authenticate(model.Username, model.Password))
                 {
+                    Logger.Log(model.Username + ",logged in",fileName);
                     return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
                 }
                 else
                 {
+                    Logger.Log( model.Username + ",tried to log in unsuccessfully",fileName);
                     ModelState.AddModelError("", "Incorrect username or password");
                     return View();
                 }
             }
             else
             {
+                Logger.Log("User: " + model.Username + ",encountered a loggin error",fileName);
                 return View();
             }
         }
 
         public ActionResult Logout(string returnUrl)
         {
+            Logger.Log( System.Web.HttpContext.Current.User.Identity.Name + ",Loggout", fileName);
             authProvider.DeAuthenticate();
             return Redirect(returnUrl ?? Url.Action("Index", "Home"));
         }

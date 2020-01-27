@@ -10,15 +10,15 @@ namespace SecurityLab1_Starter.Models
     public class Logger
     {
         public static string LogDirectoryPath = Environment.CurrentDirectory;
-        public static void Log(String messages)
+        public static void Log(string messages,string fileName)
         {
             try
             {
                 //var x = LogDirectoryPath + "\\" + fileName;
 
                 //StreamWriter strw = new StreamWriter(LogDirectoryPath + "\\"+fileName, true);
-                StreamWriter strw = new StreamWriter("C:\\Temp\\log.txt", true);
-                strw.WriteLine("{0}--->{1}", DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"), messages);
+                StreamWriter strw = new StreamWriter("C:\\Temp\\"+fileName, true);
+                strw.WriteLine("{0},{1},", DateTime.Now.ToString("MM/dd/yyyy-HH:mm:ss"), messages);
                 strw.Close();
             }
             catch (Exception e)

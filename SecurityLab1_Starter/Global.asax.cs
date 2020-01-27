@@ -24,7 +24,7 @@ namespace SecurityLab1_Starter
         protected void Application_Error()
         {            
             Exception exception = Server.GetLastError();
-            Logger.Log(exception.Message);
+            Logger.Log(exception.Message,"log.txt");
             Logger.EventLog(exception.Message);
         }
     }

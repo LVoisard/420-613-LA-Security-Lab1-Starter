@@ -24,7 +24,7 @@ namespace SecurityLab1_Starter.Controllers
             base.OnException(filterContext);
             filterContext.ExceptionHandled = true;
             //Log the error!!
-            Logger.Log(filterContext.Exception.Message);
+            Logger.Log(filterContext.Exception.Message,"log.txt");
             Logger.EventLog(filterContext.Exception.Message);
             filterContext.Result = RedirectToAction("Index", "Error");
         }
