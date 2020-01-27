@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
@@ -19,6 +20,18 @@
                 <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-item nav-link" })</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-item nav-link" })</li>
                 <li>@Html.ActionLink("Inventory Pricing", "Index", "Inventory", null, new { @class = "nav-item nav-link" })</li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse float-right">
+            <ul class="nav navbar-nav">
+                @if (!Request.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-item nav-link" })</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink(System.Web.HttpContext.Current.User.Identity.Name, "Logout", "Account", null, new { @class = "nav-item nav-link" })</li>
+                }
             </ul>
         </div>
     </nav>
